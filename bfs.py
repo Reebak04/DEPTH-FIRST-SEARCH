@@ -23,16 +23,23 @@ def bfs(graph,start,visited,path):
     queue.append(start)
     visited[start] = True
     while len(queue) != 0:
+        while len(queue) != 0:
         tmpnode = queue.popleft()
-        #TYPE UR CODE HERE
+        for node in graph[tmpnode]:
+            if not visited[node]:
+                path.append(node)
+                queue.append(node)
+                visited[node] = True
     return path
 
 graph = defaultdict(list)
 v,e = map(int,input().split())
 for i in range(e):
-    #TYOE UR CODE HERE
+    u,v = input().split()
+    graph[u].append(v)
+    graph[v].append(u)
 
-start = '0'
+start = ''
 path = []
 visited = defaultdict(bool)
 traversedpath = bfs(graph,start,visited,path)
